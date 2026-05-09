@@ -7,6 +7,10 @@
 .layout-main {
   flex: 1;
   padding: 1.5rem 1.25rem 2.5rem;
+  background:
+    radial-gradient(900px 480px at 15% 30%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+    radial-gradient(850px 460px at 85% 60%, rgba(244, 114, 182, 0.2) 0%, transparent 58%),
+    transparent;
 }
 
 .navbar {
@@ -15,7 +19,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.85rem 1.25rem;
-  background: rgba(15, 20, 25, 0.75);
+  background: rgba(10, 15, 36, 0.78);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(10px);
   position: sticky;
