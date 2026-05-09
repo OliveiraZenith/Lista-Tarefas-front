@@ -3,7 +3,6 @@ import { AppContext } from './appContext'
 import { setAuthToken } from '../services/api'
 import * as authService from '../services/authService'
 import * as taskService from '../services/taskService'
-import { formatRequestError } from '../utils/requestError'
 
 const TOKEN_KEY = 'lista_tarefas_token'
 const USER_KEY = 'lista_tarefas_user'
@@ -58,7 +57,9 @@ export function AppProvider({ children }) {
         persistUser(nextUser ?? { email: credentials.email })
         return true
       } catch (e) {
-        setError(formatRequestError(e, 'Falha ao entrar.'))
+        const msg =
+          e.response?.data?.message ?? e.message ?? 'Falha ao entrar.'
+        setError(typeof msg === 'string' ? msg : 'Falha ao entrar.')
         return false
       } finally {
         setLoading(false)
@@ -80,7 +81,9 @@ export function AppProvider({ children }) {
       }
       return 'ok'
     } catch (e) {
-      setError(formatRequestError(e, 'Falha no cadastro.'))
+      const msg =
+        e.response?.data?.message ?? e.message ?? 'Falha no cadastro.'
+      setError(typeof msg === 'string' ? msg : 'Falha no cadastro.')
       return 'error'
     } finally {
       setLoading(false)
@@ -103,7 +106,9 @@ export function AppProvider({ children }) {
       const list = await taskService.fetchTasks()
       setTasks(list)
     } catch (e) {
-      setError(formatRequestError(e, 'Não foi possível carregar tarefas.'))
+      const msg =
+        e.response?.data?.message ?? e.message ?? 'Não foi possível carregar tarefas.'
+      setError(typeof msg === 'string' ? msg : 'Erro ao carregar tarefas.')
     } finally {
       setLoading(false)
     }
@@ -116,7 +121,9 @@ export function AppProvider({ children }) {
       setTasks((prev) => [created, ...prev])
       return true
     } catch (e) {
-      setError(formatRequestError(e, 'Não foi possível criar a tarefa.'))
+      const msg =
+        e.response?.data?.message ?? e.message ?? 'Não foi possível criar a tarefa.'
+      setError(typeof msg === 'string' ? msg : 'Erro ao criar tarefa.')
       return false
     }
   }, [])
@@ -130,7 +137,9 @@ export function AppProvider({ children }) {
       )
       return true
     } catch (e) {
-      setError(formatRequestError(e, 'Não foi possível salvar.'))
+      const msg =
+        e.response?.data?.message ?? e.message ?? 'Não foi possível salvar.'
+      setError(typeof msg === 'string' ? msg : 'Erro ao salvar tarefa.')
       return false
     }
   }, [])
@@ -142,7 +151,9 @@ export function AppProvider({ children }) {
       setTasks((prev) => prev.filter((t) => String(t.id) !== String(id)))
       return true
     } catch (e) {
-      setError(formatRequestError(e, 'Não foi possível excluir.'))
+      const msg =
+        e.response?.data?.message ?? e.message ?? 'Não foi possível excluir.'
+      setError(typeof msg === 'string' ? msg : 'Erro ao excluir.')
       return false
     }
   }, [])
