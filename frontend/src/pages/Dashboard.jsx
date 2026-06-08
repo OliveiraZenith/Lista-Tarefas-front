@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import EditTaskModal from '../components/EditTaskModal'
 import TaskCard from '../components/TaskCard'
 import { useApp } from '../hooks/useApp'
@@ -59,8 +60,13 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>Tarefas</h1>
-        <p className="dashboard-sub">Organize o que precisa ser feito.</p>
+        <div>
+          <h1>Tarefas</h1>
+          <p className="dashboard-sub">Organize o que precisa ser feito.</p>
+        </div>
+        <Link to="/v1" className="btn btn-ghost">
+          Ir para página v1
+        </Link>
       </header>
 
       <form className="task-create card" onSubmit={handleCreate}>

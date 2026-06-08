@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import Dashboard from '../pages/Dashboard'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import V1Page from '../pages/V1Page'
 import GuestRoute from './GuestRoute'
 import ProtectedRoute from './ProtectedRoute'
 
@@ -17,6 +18,7 @@ export function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
           <Route path="/tarefas" element={<Dashboard />} />
+          <Route path="/v1" element={<V1Page />} />
         </Route>
       </Route>
 
